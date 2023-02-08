@@ -1,0 +1,17 @@
+/*body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}*/
+
+* { 
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: .25em;
+    height: 4em
+}
