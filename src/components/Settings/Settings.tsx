@@ -27,6 +27,8 @@ function Settings() {
                 Image Batch Size
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a onClick={() => setBatchSize(2)} className="dropdown-item">2</a></li>
+                <li><a onClick={() => setBatchSize(5)} className="dropdown-item">5</a></li>
                 <li><a onClick={() => setBatchSize(10)} className="dropdown-item">10</a></li>
                 <li><a onClick={() => setBatchSize(25)} className="dropdown-item">25</a></li>
                 <li><a onClick={() => setBatchSize(50)} className="dropdown-item">50</a></li>

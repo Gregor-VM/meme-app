@@ -3,6 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMemes } from '../api/memes';
 import { SettingsContext } from '../context/Settings';
 import { MemesResponse } from '../interfaces/Meme';
+import { getUniqueListBy } from '../utils/utils';
 
 function useMemes() {
 
@@ -13,7 +14,7 @@ function useMemes() {
         ({pageParam = 0}) => getMemes(pageParam, batchSize, serverList),
         {
             getNextPageParam: (memesResponse: MemesResponse) => {
-            return memesResponse.nextIndex || false;
+            return memesResponse.nextIndex;
             }
     });
 
@@ -21,13 +22,13 @@ function useMemes() {
         return ({
           count: page.count,
           nextIndex: page?.nextIndex,
-          memes: [...prev.memes, ...page.memes]
+          memes: getUniqueListBy([...prev.memes, ...page.memes], "url")
         })
       }), [memes]);
 
       useEffect(() => {
         refetch();
-      }, [serverList])
+      }, [serverList, batchSize])
 
 
   return {isLoading, status, fetchNextPage, hasNextPage, memes, memeList};

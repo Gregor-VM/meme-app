@@ -3,7 +3,7 @@ import { Settings } from '../interfaces/settings';
 import { packObj } from '../utils/packObj';
 
 const initialState = {
-    batchSize: JSON.parse(localStorage.getItem("settings") || "{}")?.batchSize || 10,
+    batchSize: JSON.parse(localStorage.getItem("settings") || "{}")?.batchSize || 2,
     serverList: JSON.parse(localStorage.getItem("settings") || "{}")?.serverList || packObj["spanish"],
   }
 
