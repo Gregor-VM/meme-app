@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { SettingsContext } from '../../context/Settings';
 import { packObj, PackType } from '../../utils/packObj';
+import './Settings.css';
 
 function Settings() {
 
@@ -37,7 +38,7 @@ function Settings() {
   }
 
   return (
-    <div className='mb-3 mx-2 d-flex justify-content-between'>
+    <div className='mb-3 mx-2 settings'>
         <div className="dropdown bg-transparent">
             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 Image Batch Size
@@ -51,8 +52,8 @@ function Settings() {
             </ul>
         </div>
 
-        <div className='right-side d-flex align-items-center'>
-            <div className="form-check form-switch mx-3">
+        <div className='right-side'>
+            <div className="form-check form-switch mx-3 mt-3">
                 <input checked={settings.nsfwFilter} onChange={(e) => setFilter(e.target.checked)} className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
                 <label className="form-check-label" htmlFor="flexSwitchCheckDefault">NSFW filter</label>
             </div>

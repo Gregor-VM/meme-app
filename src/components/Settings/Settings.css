@@ -1,0 +1,22 @@
+.settings{
+    display: flex;
+    justify-content: space-between;
+}
+
+.right-side{
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 400px) {
+    .settings{
+        flex-direction: column;
+    }
+
+    .right-side{
+        margin-top: .5rem;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+}
+
