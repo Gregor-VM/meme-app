@@ -8,8 +8,6 @@ const spanish = [
     "MemesESP",
     "MAAU",
     "yo_elvr",
-    //"allinspanish",
-    //"amoralamilanesa",
     "argentina",
     "LatinoPeopleTwitter",
     "Yointerneto",
@@ -29,7 +27,6 @@ const english = [
     "soccercirclejerk",
     "vexillogycirclejerk",
     "BicyclingCirclejerk",
-    "4chan",
     "shitposting",
     "Animemes",
     "TrueReddit",
@@ -52,7 +49,7 @@ const english = [
 ]
 
 export const packObj = {
-    spanish: spanish,
-    english: english, 
+    spanish: spanish.sort(() => Math.random() - 0.5),
+    english: english.sort(() => Math.random() - 0.5), 
     all: [...spanish, ...english].sort(() => Math.random() - 0.5),
 }

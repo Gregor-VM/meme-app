@@ -2,10 +2,13 @@ import { createContext, useState } from 'react';
 import { Settings } from '../interfaces/settings';
 import { packObj } from '../utils/packObj';
 
+const savedSettings = JSON.parse(localStorage.getItem("settings") || "{}");
+
 const initialState = {
-    batchSize: JSON.parse(localStorage.getItem("settings") || "{}")?.batchSize || 2,
-    serverList: JSON.parse(localStorage.getItem("settings") || "{}")?.serverList || packObj["spanish"],
-  }
+    batchSize: savedSettings?.batchSize || 2,
+    serverList: savedSettings?.serverList || packObj["spanish"],
+    nsfwFilter: savedSettings?.nsfwFilter === false ? false : true
+}
 
 export const SettingsContext: React.Context<Settings> = createContext(initialState);
 
@@ -16,6 +19,7 @@ function SettingsProvider({children}: any) {
 
   const changeSettings = (newSettings: Partial<Settings>) => {
     setSettings({...settings, ...newSettings});
+    localStorage.setItem("settings", JSON.stringify({...settings, ...newSettings}));
   }
 
   return <SettingsContext.Provider value={{...settings, changeSettings}} >
