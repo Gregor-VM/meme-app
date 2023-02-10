@@ -49,7 +49,7 @@ const english = [
 ]
 
 export const packObj = {
-    spanish: spanish.sort(() => Math.random() - 0.5),
-    english: english.sort(() => Math.random() - 0.5), 
+    spanish: spanish,
+    english: english, 
     all: [...spanish, ...english].sort(() => Math.random() - 0.5),
 }

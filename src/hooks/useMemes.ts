@@ -4,14 +4,28 @@ import { getMemes } from '../api/memes';
 import { SettingsContext } from '../context/Settings';
 import { MemesResponse, Meme } from '../interfaces/Meme';
 import { getUniqueListBy } from '../utils/utils';
+import useFetchMemes from './useFetchMemes';
 
 function useMemes() {
 
     const {batchSize, serverList, nsfwFilter} = useContext(SettingsContext);
 
-    const {data: memes, isLoading, status, fetchNextPage, hasNextPage, refetch} = useInfiniteQuery<MemesResponse>(
+    const savedCursor: {cursor: number, pageParam: number} = useMemo(() => {
+      const savedCursorTemp = localStorage.getItem("cursor");
+      return savedCursorTemp ? JSON.parse(savedCursorTemp) : null;
+    }, []);
+
+    const getMemesLimited = useFetchMemes({cursorParam: savedCursor?.cursor || 0});
+
+    const {data: memes, isLoading, isError, fetchNextPage, hasNextPage, refetch} = useInfiniteQuery<MemesResponse>(
         ['characters', serverList], 
-        ({pageParam = 0}) => getMemes(pageParam, batchSize, serverList),
+        ({pageParam = 0}) => {
+          if(pageParam === 0 && savedCursor?.pageParam){
+            pageParam = savedCursor.pageParam;
+            localStorage.removeItem("cursor");
+          }
+          return getMemesLimited(pageParam, batchSize, serverList)
+        },
         {
             getNextPageParam: (memesResponse: MemesResponse) => {
             return memesResponse.nextIndex;
@@ -20,8 +34,8 @@ function useMemes() {
 
     const memeList = useMemo(() => memes?.pages.reduce((prev, page) => {
         let newMemeList: Meme[] | never[] = [];
-        if(nsfwFilter) newMemeList = getUniqueListBy([...prev.memes, ...page.memes], "url").filter(memes => !memes.nsfw)
-        else getUniqueListBy([...prev.memes, ...page.memes], "url")
+        if(nsfwFilter) newMemeList = getUniqueListBy([...prev.memes, ...page.memes], "url").filter(memes => memes.nsfw === false)
+        else newMemeList = getUniqueListBy([...prev.memes, ...page.memes], "url")
 
         return ({
           count: page.count,
@@ -35,7 +49,7 @@ function useMemes() {
       }, [serverList, batchSize, nsfwFilter])
 
 
-  return {isLoading, status, fetchNextPage, hasNextPage, memes, memeList};
+  return {isLoading, isError, fetchNextPage, hasNextPage, memes, memeList};
 }
 
 export default useMemes

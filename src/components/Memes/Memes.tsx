@@ -8,9 +8,11 @@ import Settings from "../Settings/Settings";
 function Memes() {
 
   //const {data: memes, isLoading} = useQuery<MemesResponse>({ queryKey: ['memes', server], queryFn: () => getMemes(server) })
-  const {memeList, isLoading, fetchNextPage, hasNextPage} = useMemes();
+  const {memeList, isLoading, isError, fetchNextPage, hasNextPage} = useMemes();
 
-  if(isLoading) return <div>Loading...</div>;
+  if(isLoading) return <div className="text-center">Loading...</div>;
+
+  if(isError) return <div className="text-center">Couldn't bring any data :(</div>;
 
   return (
     <>
