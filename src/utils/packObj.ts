@@ -2,21 +2,21 @@ export type PackType = keyof (typeof packObj);
 
 const spanish = [
     "SpanishMeme",
-    "spanishmemes",
+    //"spanishmemes",
     "MemesEnEspanol",
-    "DankHispano",
+    //"DankHispano",
     "MemesESP",
     "MAAU",
-    "yo_elvr",
+    //"yo_elvr",
     "argentina",
     "LatinoPeopleTwitter",
     "Yointerneto",
-    "SpanishHistoryMemes",
+    //"SpanishHistoryMemes",
     "memexico",
     "dankgentina",
-    "SquarePosting",
-    "memewordES",
-    "ImagenesChistosas2007"
+    //"SquarePosting",
+    //"memewordES",
+    //"ImagenesChistosas2007"
 ]
 
 const english = [
