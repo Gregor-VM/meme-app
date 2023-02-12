@@ -19,7 +19,7 @@ function MemeItem({meme}: propType) {
     const {url, title, postLink, nsfw, preview} = meme;
 
     const selectedUrl = useMemo(() => {
-        return lowRes ? preview[1] : url;
+        return lowRes ? preview[2] : url;
     }, [lowRes]);
 
 
