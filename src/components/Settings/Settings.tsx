@@ -32,6 +32,12 @@ function Settings() {
     });
   }
 
+  const setLowRes = (lowRes: boolean) => {
+    if(changeSettings) changeSettings({
+        lowRes: lowRes
+    });
+  }
+
   const batchClasses = (value: number) => {
     if(value === settings.batchSize) return "dropdown-item " + "bg-primary";
     else return "dropdown-item";
@@ -58,9 +64,13 @@ function Settings() {
         </div>
 
         <div className='right-side'>
+          <div className="form-check form-switch mx-3 mt-3">
+                <input checked={settings.lowRes} onChange={(e) => setLowRes(e.target.checked)} className="form-check-input" type="checkbox" id="lowRes" />
+                <label className="form-check-label text-white" htmlFor="lowRes">Low res</label>
+            </div>
             <div className="form-check form-switch mx-3 mt-3">
-                <input checked={settings.nsfwFilter} onChange={(e) => setFilter(e.target.checked)} className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-                <label className="form-check-label text-white" htmlFor="flexSwitchCheckDefault">NSFW filter</label>
+                <input checked={settings.nsfwFilter} onChange={(e) => setFilter(e.target.checked)} className="form-check-input" type="checkbox" id="nsfwFilter" />
+                <label className="form-check-label text-white" htmlFor="nsfwFilter">NSFW filter</label>
             </div>
             <div className="dropdown bg-transparent">
                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

@@ -3,4 +3,5 @@ export interface Settings {
     serverList: Array<string>;
     changeSettings?: (changeSettings: Partial<Settings>) => void;
     nsfwFilter: boolean;
+    lowRes: boolean;
 }

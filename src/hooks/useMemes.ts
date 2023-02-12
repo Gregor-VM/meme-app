@@ -8,7 +8,7 @@ import useFetchMemes from './useFetchMemes';
 
 function useMemes() {
 
-    const {batchSize, serverList, nsfwFilter} = useContext(SettingsContext);
+    const {batchSize, serverList, nsfwFilter, lowRes} = useContext(SettingsContext);
 
     const savedCursor: {cursor: number, pageParam: number} = useMemo(() => {
       const savedCursorTemp = localStorage.getItem("cursor");
@@ -46,7 +46,7 @@ function useMemes() {
 
       useEffect(() => {
         refetch();
-      }, [serverList, batchSize, nsfwFilter])
+      }, [serverList, batchSize, nsfwFilter, lowRes])
 
 
   return {isLoading, isError, fetchNextPage, hasNextPage, memes, memeList};

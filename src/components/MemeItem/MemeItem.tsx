@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { ResponsiveMasonry } from 'react-responsive-masonry';
 import { Meme } from '../../interfaces/Meme';
 import Masonry from 'react-responsive-masonry';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { SettingsContext } from '../../context/Settings';
 
 interface propType {
     meme: Meme
@@ -13,7 +14,13 @@ function MemeItem({meme}: propType) {
 
     const [height, setHeight] = useState("400px");
 
-    const {url, title, postLink, nsfw} = meme;
+    const {lowRes} = useContext(SettingsContext);
+
+    const {url, title, postLink, nsfw, preview} = meme;
+
+    const selectedUrl = useMemo(() => {
+        return lowRes ? preview[1] : url;
+    }, [lowRes]);
 
 
 
@@ -27,7 +34,7 @@ function MemeItem({meme}: propType) {
                     afterLoad={() => setHeight("auto")}
                     alt={title}
                     effect="blur"
-                    src={url}
+                    src={selectedUrl}
                     width="100%"
                     height={height}
                     style={{minHeight: "200px"}} />

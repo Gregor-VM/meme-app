@@ -7,7 +7,8 @@ const savedSettings = JSON.parse(localStorage.getItem("settings") || "{}");
 const initialState = {
     batchSize: savedSettings?.batchSize || 2,
     serverList: savedSettings?.serverList || packObj["spanish"],
-    nsfwFilter: savedSettings?.nsfwFilter === false ? false : true
+    nsfwFilter: savedSettings?.nsfwFilter === false ? false : true,
+    lowRes: savedSettings?.lowRes === false ? false : true
 }
 
 export const SettingsContext: React.Context<Settings> = createContext(initialState);
